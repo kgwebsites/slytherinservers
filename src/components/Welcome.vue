@@ -1,7 +1,7 @@
 <template>
     <section id="app-welcome" class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Contact Form API</h1>
+            <h1 class="jumbotron-heading">Slytherin Servers</h1>
             <p class="lead text-muted">You build the front end, we build the back.</p>
             <p class="lead text-muted">The perfect solution for server-less applications.</p>
             <p>

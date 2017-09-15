@@ -7,7 +7,7 @@
 
                     <section class="placeholders">
                         <h2>Documentation that's as easy as copy and paste</h2>     
-                        <p>Just make a post request to "https://serverless.io/contact" with the parameters below to store a new request:</p>
+                        <p>Just make a post request to "https://api.slytherinservers.com/contact" with the parameters below to store a new request:</p>
                         <pre class="prettyprint">
 apikey: "{{ $store.state.user.uid }}",
 first_name: "[REQUEST FIRST NAME]",

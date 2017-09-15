@@ -1,0 +1,21 @@
+{
+  "name": "slytherin-servers",
+  "version": "1.0.0",
+  "description": "Slytherin Servers API Endpoints",
+  "main": "server.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "author": "Kyle Goss",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "express-validator": "^3.2.1",
+    "firebase": "^4.3.0",
+    "moment": "^2.18.1",
+    "request": "^2.81.0",
+    "sparkpost": "^2.1.2"
+  }
+}
