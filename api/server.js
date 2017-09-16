@@ -12,7 +12,8 @@ const expressValidator = require('express-validator');
 const request = require('request');
 const moment = require('moment');
 const firebase = require("firebase");
-const firebaseUrl = 'https://serverless-io.firebaseio.com/';
+const firebaseDBUrl = 'https://slytherin-servers.firebaseio.com/';
+const firebaseAuthDomain = 'slytherin-servers.firebaseapp.com';
 const sparkpostSecret = 'fca6b412288aa708ab5b05d401121520c2b99b9d';
 const SparkPost = require('sparkpost');
 const options = {
@@ -22,12 +23,12 @@ const client = new SparkPost(sparkpostSecret, options);
 
 // Initialize Firebase
 const config = {
-    apiKey: "AIzaSyBbWxwjQ_2nXgzZXTUfUjeCST_aLvoYtnw",
-    authDomain: "serverless-io.firebaseapp.com",
-    databaseURL: "https://serverless-io.firebaseio.com",
-    projectId: "serverless-io",
-    storageBucket: "serverless-io.appspot.com",
-    messagingSenderId: "23294201740"
+    apiKey: "AIzaSyBoZTHS7flw3FeqAwlP-wUr7hORUVeh5IM",
+    authDomain: firebaseAuthDomain,
+    databaseURL: firebaseDBUrl,
+    projectId: "slytherin-servers",
+    storageBucket: "slytherin-servers.appspot.com",
+    messagingSenderId: "737726446033"
 };
 firebase.initializeApp(config);
 
@@ -151,7 +152,7 @@ app.post('/contact', function(req, res){
                 }
                 // Request Config
                 const options = {
-                    url: firebaseUrl + '/accounts/' + apikey + '/requests.json',
+                    url: firebaseDBUrl + '/accounts/' + apikey + '/requests.json',
                     method: 'POST',
                     headers: headers,
                     form: JSON.stringify(newContactRequest)

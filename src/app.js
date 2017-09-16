@@ -13,14 +13,17 @@ import { routes } from './routes';
 import { store } from './store/store';
 import firebase from 'firebase';
 
+const firebaseDBUrl = 'https://slytherin-servers.firebaseio.com/';
+const firebaseAuthDomain = 'slytherin-servers.firebaseapp.com';
+
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyBbWxwjQ_2nXgzZXTUfUjeCST_aLvoYtnw",
-    authDomain: "serverless-io.firebaseapp.com",
-    databaseURL: "https://serverless-io.firebaseio.com/",
-    projectId: "serverless-io",
-    storageBucket: "serverless-io.appspot.com",
-    messagingSenderId: "23294201740"
+const config = {
+    apiKey: "AIzaSyBoZTHS7flw3FeqAwlP-wUr7hORUVeh5IM",
+    authDomain: firebaseAuthDomain,
+    databaseURL: firebaseDBURL,
+    projectId: "slytherin-servers",
+    storageBucket: "slytherin-servers.appspot.com",
+    messagingSenderId: "737726446033"
 };
 firebase.initializeApp(config);
 
