@@ -54,7 +54,7 @@ export const routes = [
     { 
         path: '/account', 
         name: 'account',
-        redirect: { name: 'overview' },
+        redirect: { name: 'contact-requests' },
         components: {
             default: Account,
             'template-header': AccountHeader

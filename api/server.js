@@ -79,7 +79,8 @@ app.use(function (req, res, next) {
 
 app.post('/account/requests', function (req, res) {
     //Validation
-    req.assert('apikey', 'API Key is required').notEmpty();
+    console.log(req.body);
+    req.assert('uid', 'API Key is required').notEmpty();
 
     req.getValidationResult()
         .then(function (result) {

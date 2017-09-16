@@ -88,6 +88,7 @@
                             desc.sort(function(a,b) {
                                 return a.timestamp - b.timestamp;
                             });
+                            this.requests = desc;
                             this.$store.dispatch('updateRequests', desc);
                         }
                     } else {
