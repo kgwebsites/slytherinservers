@@ -174,37 +174,38 @@ app.post('/contact', function(req, res){
 
                 //Fetch settings from firebase account
                 const settings = firebase.database().ref('accounts/' + apikey + '/settings');
-                var notifications = null;
+                let notifications = null;
+
                 //Store notification settings
                 settings.once('value', function (snapshot) {
                     notifications = snapshot.val().notifications;
-                });
-
-                if(notifications === true){
-                    //Send notification email
-                    client.transmissions.send({
-                        options: {
-                            sandbox: true
-                        },
-                        content: {
-                            from: 'testing@sparkpostbox.com',
-                            subject: 'Hello, World!',
-                            html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
-                        },
-                        recipients: [
-                            { address: 'gosskyle93@gmail.com' }
-                        ]
-                    })
-                        .then(data => {
-                            console.log('Woohoo! You just sent your first mailing!');
-                            console.log(data);
+                }).then(() => {
+                    if(notifications === true){
+                        //Send notification email
+                        client.transmissions.send({
+                            options: {
+                                sandbox: true
+                            },
+                            content: {
+                                from: 'testing@sparkpostbox.com',
+                                subject: 'Hello, World!',
+                                html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+                            },
+                            recipients: [
+                                { address: 'gosskyle93@gmail.com' }
+                            ]
                         })
-                        .catch(err => {
-                            console.log('Whoops! Something went wrong');
-                            console.log(err);
-                        });
+                            .then(data => {
+                                console.log('Woohoo! You just sent your first mailing!');
+                                console.log(data);
+                            })
+                            .catch(err => {
+                                console.log('Whoops! Something went wrong');
+                                console.log(err);
+                            });
 
-                }
+                    }
+                });
 
 
                 //Submit response
