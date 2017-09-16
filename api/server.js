@@ -175,11 +175,12 @@ app.post('/contact', function(req, res){
                 //Fetch settings from firebase account
                 const settings = firebase.database().ref('accounts/' + apikey + '/settings');
                 let notifications = null;
+                let notificationEmail = '';
 
                 //Store notification settings
                 settings.once('value', function (snapshot) {
                     notifications = snapshot.val().notifications;
-                    const notificationEmail = snapshot.val().notificationEmail;
+                    notificationEmail = snapshot.val().notificationEmail;
                 }).then(() => {
                     if(notifications === true){
                         //Send notification email
