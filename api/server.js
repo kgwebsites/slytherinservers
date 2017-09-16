@@ -200,21 +200,21 @@ app.post('/contact', function(req, res){
                                 { address: notificationEmail }
                             ]
                         })
-                            .then(data => {
-                                console.log('Woohoo! You just sent your first mailing!');
-                                console.log(data);
-                            })
-                            .catch(err => {
-                                console.log('Whoops! Something went wrong');
-                                console.log(err);
+                        .then(data => {
+                            //Submit response
+                            res.json({ status: 200, data: newContactRequest });
+                        })
+                        .catch(err => {
+                            res.json({
+                                status: 500,
+                                error: err
                             });
-
+                        });
+                    } else {
+                        //Submit response
+                        res.json({ status: 200, data: newContactRequest });
                     }
                 });
-
-
-                //Submit response
-                res.json({status: 200, data: newContactRequest});
 
             } else {
                 res.json({
