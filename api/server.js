@@ -187,12 +187,13 @@ app.post('/contact', function(req, res){
                                 sandbox: true
                             },
                             content: {
-                                from: newContactRequest.email,
-                                subject: 'Hello, World!',
-                                html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+                                from: 'no-reply@kgwebsites.com',
+                                reply_to: newContactRequest.email,
+                                subject: newContactRequest.subject,
+                                html: '<html><body><p>' + newContactRequest.message + '</p></body></html>'
                             },
                             recipients: [
-                                { address: 'gosskyle93@gmail.com' }
+                                { address: 'kyle@kgwebsites.com' }
                             ]
                         })
                             .then(data => {
