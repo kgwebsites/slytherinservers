@@ -1,5 +1,4 @@
 #!/usr/bin/env nodejs
-console.log('Server running at http://localhost:3000/');
 /*
  *
  * Init
@@ -75,84 +74,20 @@ app.use(function (req, res, next) {
  * 
  */
 
- //Account Username/Password Creation
- app.post('/account/create', function(req, res){
-    //Validation
-    req.assert('first_name', 'First Name is required').notEmpty();
-    req.assert('last_name', 'Last Name is required').notEmpty();
-    req.assert('email', 'Valid email is required').notEmpty().isEmail();
-    req.assert('password', 'Password is required.').notEmpty();
-
-    req.getValidationResult()
-    .then(function (result) {
-        //If there are no errors
-        if (result.isEmpty()) {
-            const account = {
-                    name: {
-                        first: req.body.first_name.charAt(0).toUpperCase() + req.body.first_name.slice(1),
-                        last: req.body.last_name.charAt(0).toUpperCase() + req.body.last_name.slice(1)
-                    },
-                    email: req.body.email,
-                    password: req.body.password
-                }
-
-            //Create Firebase Account
-            firebase.auth().createUserWithEmailAndPassword(account.email, account.password).then(function() {
-                //User created successful.
-                
-                //Update account with name
-                const user = firebase.auth().currentUser;
-                
-                user.updateProfile({
-                    displayName: account.name.first + ' ' + account.name.last
-                }).then(function () {
-                // Update successful.
-                    res.json({
-                        status: 200,
-                        user: user
-                    });
-                }).catch(function (error) {
-                // An error happened.
-                    res.json({
-                        status: 500,
-                        error: error
-                    });
-                });
-
-            }).catch(function (error) {
-                res.json({
-                    status: 500,
-                    error: {
-                        code: error.code,
-                        msg: error.message
-                    }
-                });
-            });
-
-        } else {
-            //Return errors
-            res.json({
-                status: 500,
-                error: result.array(1)
-            });
-    }
-    });
-});
-
 //Get Contact Requests
 
 app.post('/account/requests', function (req, res) {
     //Validation
-    req.assert('apiKey', 'API Key is required').notEmpty();
+    req.assert('apikey', 'API Key is required').notEmpty();
 
     req.getValidationResult()
         .then(function (result) {
             //If there are no errors
             if (result.isEmpty()) {
-                const apiKey = req.body.uid;
+                const apikey = req.body.uid;
 
                 //Fetch requests from firebase account
-                const contactRequests = firebase.database().ref('accounts/' + apiKey + '/requests');
+                const contactRequests = firebase.database().ref('accounts/' + apikey + '/requests');
 
                 //When requests are changed update requests
                 contactRequests.once('value', function (snapshot) {
@@ -244,7 +179,7 @@ app.post('/contact', function(req, res){
                 });
 
                 if(notifications === true){
-
+                    //Send notification email
                     client.transmissions.send({
                         options: {
                             sandbox: true
