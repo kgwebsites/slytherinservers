@@ -117,18 +117,18 @@
                         firebase.auth().currentUser.updateProfile({
                             displayName: account.name.first + ' ' + account.name.last,
                         }).then(() => {
-                            //Update DB with default settings
-                            firebase.database().ref('accounts/' + response.uid + '/settings').set({
+                            //Set default settings
+                            const newSettings = {
                                 notifications: true,
                                 notificationEmail: account.email
-                            }).then(() => {
+                            }
+                            //Update DB with default settings
+                            firebase.database().ref('accounts/' + response.uid + '/settings').set(newSettings)
+                            .then(() => {
                                 // Set store user
                                 self.$store.dispatch('updateUser', response);
-                                //Set settings
-                                const settings = {
-                                    notifications: true
-                                }
-                                self.$store.dispatch('updateSettings', settings);
+                                //Update store with settings
+                                self.$store.dispatch('updateSettings', newSettings);
                                 // Go to account page
                                 self.$router.push('account');
                             }).catch(error => {
@@ -156,12 +156,18 @@
                     //If no settings in account, set default settings
                     userSettings.once('value').then(settings => {
                         if(settings.val() == null){
-                            userSettings.set({
+                            const newSettings = {
                                 notifications: true,
                                 notificationEmail: response.user.email
-                            }).catch(error => {
+                            }
+                            userSettings.set(newSettings).catch(error => {
                                 alert('Error Code: ' + error.code + ' - ' + error.msg);
                             });
+                            //Update store with settings
+                            self.$store.dispatch('updateSettings', newSettings);
+                            //If there are settings, update the store with them
+                        } else {
+                            self.$store.dispatch('updateSettings', settings.val())
                         }
                     });
                     //Get Requests

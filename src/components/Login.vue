@@ -116,14 +116,21 @@
                         //If no settings in account, set default settings
                         userSettings.once('value').then(settings => {
                             if (settings.val() == null) {
-                                userSettings.set({
+                                const newSettings = {
                                     notifications: true,
                                     notificationEmail: response.user.email
-                                }).catch(error => {
+                                }
+                                userSettings.set(newSettings).catch(error => {
                                     alert('Error Code: ' + error.code + ' - ' + error.msg);
                                 });
+                                //Update store with settings
+                                self.$store.dispatch('updateSettings', newSettings);
+                        //If there are settings, update the store with them
+                            } else {
+                                self.$store.dispatch('updateSettings', settings.val())
                             }
                         });
+
                         //Get Requests
                         self.$http.post('account/requests', self.$store.state.user).then(response => {
                             if (response.data.status == 200) {

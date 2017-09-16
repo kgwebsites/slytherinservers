@@ -26,8 +26,16 @@
                             <transition name="fade" mode="out-in">
                                 <div v-if="notifications" class="row ml-0 mr-0 pt-3 pb-3">
                                     <label for="notifications-email" class="col-md-4 pl-0 col-form-label form-text">Notifications sent to</label>
-                                    <input type="email" id="notification-email" class="col-md-8 form-control" placeholder="bob@bobsburgers.com" :value="notificationEmail" @change="changeNotification('email', $event)">
+                                    <input type="email" id="notification-email" class="col-md-8 form-control" placeholder="bob@bobsburgers.com" v-model="notificationEmail">
                                 </div>
+                            </transition>
+                            <transition name="fade" mode="out-in">
+                                <div v-if="notificationEmail != notificationEmailOld">
+                                    <button class="btn btn-outline-info" @click="changeNotification('email', $event)">Update Email</button>
+                                </div>
+                            </transition>
+                            <transition name="fade" mode="out-in">
+                                <div v-if="status != null" class="text-success pt-3">{{ status }}</div>
                             </transition>
                         </div>
                     </div>
@@ -44,15 +52,18 @@
             return {
                 notifications: this.$store.state.settings.notifications,
                 notificationEmail: this.$store.state.settings.notificationEmail,
+                notificationEmailOld: this.$store.state.settings.notificationEmail,
+                status: null
             }
         },
         methods: {
             changeNotification: function(prop, event) {
+                //Reset status
+                this.status = null;
+                
                 //Update data
                 if (prop === 'status') {
                     this.notifications = !this.notifications;
-                } else if (prop === 'email'){
-                    this.notificationEmail = event.target.value;
                 }
 
                 const settings = {
@@ -61,10 +72,14 @@
                 }
 
                 //Update database
-                firebase.database().ref('accounts/' + this.$store.state.user.uid + '/settings').set(settings);
+                firebase.database().ref('accounts/' + this.$store.state.user.uid + '/settings').set(settings)
+                .then(() => {
+                    //Update store
+                    this.$store.dispatch('updateSettings', settings);
+                    //Alert user status change
+                    this.status = "Notification email updated";
+                });
 
-                //Update state
-                this.$store.dispatch('updateSettings', settings);
             }
         }
     }
