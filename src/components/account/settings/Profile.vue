@@ -48,7 +48,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
                                         <button @click="updateProfile" class="btn btn-outline-info">Update Profile</button>
-                                        <span v-if="profileUpdated" class="form-text text-success">Profile Updated</span>
+                                        <span v-if="profileUpdated" class="form-text text-success pt-2">Profile Updated</span>
                                     </div>
                                 </div>
                             </div>
