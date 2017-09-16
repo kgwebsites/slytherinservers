@@ -187,7 +187,10 @@ app.post('/contact', function(req, res){
                                 sandbox: false
                             },
                             content: {
-                                from: 'no-reply@kgwebsites.com',
+                                from: {
+                                    email:'no-reply@kgwebsites.com',
+                                    name: newContactRequest.name.first + ' ' + newContactRequest.name.last
+                                },
                                 reply_to: newContactRequest.email,
                                 subject: newContactRequest.subject,
                                 html: '<html><body><p>' + newContactRequest.message + '</p></body></html>'
