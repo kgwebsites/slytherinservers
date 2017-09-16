@@ -20,7 +20,7 @@ const firebaseAuthDomain = 'slytherin-servers.firebaseapp.com';
 const config = {
     apiKey: "AIzaSyBoZTHS7flw3FeqAwlP-wUr7hORUVeh5IM",
     authDomain: firebaseAuthDomain,
-    databaseURL: firebaseDBURL,
+    databaseURL: firebaseDBUrl,
     projectId: "slytherin-servers",
     storageBucket: "slytherin-servers.appspot.com",
     messagingSenderId: "737726446033"
