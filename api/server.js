@@ -190,7 +190,7 @@ app.post('/contact', function(req, res){
                             },
                             content: {
                                 from: {
-                                    email:'no-reply@kgwebsites.com',
+                                    email:'no-reply@slytherinservers.com',
                                     name: newContactRequest.name.first + ' ' + newContactRequest.name.last
                                 },
                                 reply_to: newContactRequest.email,
