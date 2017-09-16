@@ -85,10 +85,10 @@ app.post('/account/requests', function (req, res) {
         .then(function (result) {
             //If there are no errors
             if (result.isEmpty()) {
-                const apikey = req.body.uid;
+                const apiKey = req.body.uid;
 
                 //Fetch requests from firebase account
-                const contactRequests = firebase.database().ref('accounts/' + apikey + '/requests');
+                const contactRequests = firebase.database().ref('accounts/' + apiKey + '/requests');
 
                 //When requests are changed update requests
                 contactRequests.once('value', function (snapshot) {

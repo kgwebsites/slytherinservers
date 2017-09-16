@@ -78,7 +78,6 @@
             }
         },
         created(){
-            console.log(this.requests.length)
             this.$http.post('account/requests', this.$store.state.user)
                 .then(response => {
                     if (response.data.status == 200) {
