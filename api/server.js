@@ -184,7 +184,7 @@ app.post('/contact', function(req, res){
                         //Send notification email
                         client.transmissions.send({
                             options: {
-                                sandbox: true
+                                sandbox: false
                             },
                             content: {
                                 from: 'no-reply@kgwebsites.com',
