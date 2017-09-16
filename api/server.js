@@ -179,6 +179,7 @@ app.post('/contact', function(req, res){
                 //Store notification settings
                 settings.once('value', function (snapshot) {
                     notifications = snapshot.val().notifications;
+                    const notificationEmail = snapshot.val().notificationEmail;
                 }).then(() => {
                     if(notifications === true){
                         //Send notification email
@@ -196,7 +197,7 @@ app.post('/contact', function(req, res){
                                 html: '<html><body><p>' + newContactRequest.message + '</p></body></html>'
                             },
                             recipients: [
-                                { address: 'kyle@kgwebsites.com' }
+                                { address: notificationEmail }
                             ]
                         })
                             .then(data => {
