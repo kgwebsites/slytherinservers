@@ -30,7 +30,7 @@
                                 </div>
                             </transition>
                             <transition name="fade" mode="out-in">
-                                <div v-if="notificationEmail != notificationEmailOld">
+                                <div v-if="notificationEmail != notificationEmailCurrent">
                                     <button class="btn btn-outline-info" @click="changeNotification('email', $event)">Update Email</button>
                                 </div>
                             </transition>
@@ -52,7 +52,7 @@
             return {
                 notifications: this.$store.state.settings.notifications,
                 notificationEmail: this.$store.state.settings.notificationEmail,
-                notificationEmailOld: this.$store.state.settings.notificationEmail,
+                notificationEmailCurrent: this.$store.state.settings.notificationEmail,
                 status: null
             }
         },
@@ -60,7 +60,7 @@
             changeNotification: function(prop, event) {
                 //Reset status
                 this.status = null;
-                
+
                 //Update data
                 if (prop === 'status') {
                     this.notifications = !this.notifications;
@@ -78,6 +78,8 @@
                     this.$store.dispatch('updateSettings', settings);
                     //Alert user status change
                     this.status = "Notification email updated";
+                    //Reset current email
+                    this.notificationEmailCurrent = this.notificationEmail;
                 });
 
             }
