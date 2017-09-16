@@ -187,7 +187,7 @@ app.post('/contact', function(req, res){
                                 sandbox: true
                             },
                             content: {
-                                from: 'testing@sparkpostbox.com',
+                                from: newContactRequest.email,
                                 subject: 'Hello, World!',
                                 html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
                             },
