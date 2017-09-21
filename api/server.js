@@ -141,6 +141,9 @@ app.post('/contact', function(req, res){
                     date_entered: moment().format('MMMM Do YYYY, h:mm:ss a'),
                     timestamp: 0 - moment().valueOf()
                 }
+                if (newContactRequest.phone == null || newContactRequest.phone == ''){
+                    newContactRequest.phone = 'Not provided';
+                }
 
                 /*
                  * Insert into Firebase
@@ -195,7 +198,7 @@ app.post('/contact', function(req, res){
                                 },
                                 reply_to: newContactRequest.email,
                                 subject: newContactRequest.subject,
-                                html: '<html><body><p>' + newContactRequest.message + '</p></body></html>'
+                                html: '<html><body><p>' + newContactRequest.message + '</p><p><strong>Email: </strong>' + newContactRequest.email + '</p><p><strong>Phone: </strong>' + newContactRequest.phone + '</p></body></html>'
                             },
                             recipients: [
                                 { address: notificationEmail }
