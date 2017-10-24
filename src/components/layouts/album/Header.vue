@@ -37,7 +37,7 @@
         </transition>
         <div class="navbar navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
-                <router-link to="/" class="navbar-brand">Contact Form API</router-link>
+                <router-link to="/" class="navbar-brand">Slytherin Servers</router-link>
                 <button class="navbar-toggler" @click="navActive = !navActive ? 1 : 0">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,7 +49,7 @@
     export default {
         data() {
             return {
-                navActive: 0 
+                navActive: 0
             }
         },
         methods: {
